@@ -1,4 +1,4 @@
-package com.example.hatem.tick_toc_app;
+package com.example.hatem.tick_toc_app.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,11 +8,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
 
+import com.example.hatem.tick_toc_app.R;
+
 public class EventsActivity extends AppCompatActivity {
 
-    Toolbar toolbar ;
-    ListView listView ;
-    Context context
+    Toolbar toolbar;
+    ListView listView;
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +29,7 @@ public class EventsActivity extends AppCompatActivity {
     }
 
 
-    private void initToolBar (){
+    private void initToolBar() {
         toolbar = (Toolbar) findViewById(R.id.events_toolbar);
         toolbar.setTitle("Events");
 
@@ -38,10 +41,12 @@ public class EventsActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,MainActivity.class);
+                Intent intent = new Intent(context, MainActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
+
+    }
 
 }
