@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 import com.example.hatem.tick_toc_app.ORM.Attendee;
 import com.example.hatem.tick_toc_app.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import Utilities.CircleTransform;
 
 /**
  * Created by hatem on 12/5/16.
@@ -31,6 +34,7 @@ public class AttendeesAdapter extends BaseAdapter{
     static class ViewHolder{
         private TextView textView_email;
         private ImageView imageView_status;
+        private  ImageView imageView_attendeeProfileImage;
     }
 
     @Override
@@ -56,6 +60,7 @@ public class AttendeesAdapter extends BaseAdapter{
             viewHolder = new ViewHolder();
             viewHolder.textView_email = (TextView) convertView.findViewById(R.id.detailedEvent_textview_email);
             viewHolder.imageView_status = (ImageView) convertView.findViewById(R.id.detailedEvent_imageview_status);
+            viewHolder.imageView_attendeeProfileImage = (ImageView) convertView.findViewById(R.id.imageView_Attendees_image);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -63,6 +68,7 @@ public class AttendeesAdapter extends BaseAdapter{
         Attendee attendee = getItem(position);
         viewHolder.textView_email.setText(attendee.getDisplayName());
         String status = attendee.getResponseStatus();
+
         if(status.equals("needsAction")){
 
             viewHolder.imageView_status.setImageResource(R.drawable.pending);
@@ -70,6 +76,7 @@ public class AttendeesAdapter extends BaseAdapter{
             viewHolder.imageView_status.setImageResource(R.drawable.ok);
         }
 
+        Picasso.with(context).load(R.drawable.emptyprofilepicture).transform(new CircleTransform()).into(viewHolder.imageView_attendeeProfileImage);
         return convertView;
     }
 

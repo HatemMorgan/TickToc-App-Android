@@ -5,10 +5,11 @@
 
 
         <ImageView
+
             android:layout_margin="15dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView_Review_AuthorImage"
+            android:id="@+id/imageView_Attendees_image"
             android:src="@mipmap/ic_launcher"
             android:layout_weight="1"
             />

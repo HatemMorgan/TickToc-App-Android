@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,6 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import Utilities.CircleTransform;
 import Utilities.DateUtility;
 import Utilities.RequestQueueSingelton;
 
@@ -39,8 +41,10 @@ public class DetailedEvent extends AppCompatActivity {
     TextView textView_endTime;
     ListView listView_Attendees;
     ImageButton imageBtn_location;
+    ImageView imageView_organizerProfileImage;
     Toolbar toolbar;
     Context context;
+    TextView textView_organizer;
     DetailedEventObj detailedEvent ;
 
     @Override
@@ -53,9 +57,10 @@ public class DetailedEvent extends AppCompatActivity {
         textView_startTime = (TextView) findViewById(R.id.detialedEvent_textView_startTime);
         textView_endDate = (TextView) findViewById(R.id.detialedEvent_textView_endTime);
         textView_endTime = (TextView) findViewById(R.id.detialedEvent_textView_endTime);
+        textView_organizer = (TextView) findViewById(R.id.detailedEvent_textview_oragnizeEmail);
         listView_Attendees = (ListView) findViewById(R.id.detailedEvent_listView);
         imageBtn_location = (ImageButton) findViewById(R.id.detailedEvent_imageview_location);
-
+        imageView_organizerProfileImage = (ImageView) findViewById(R.id.detailedEvent_imageView_organizeImage);
         context = this;
         initToolBar();
 
@@ -99,6 +104,7 @@ public class DetailedEvent extends AppCompatActivity {
                 DetailedEventResponseObject detailedEventResponseObject = gson.fromJson(response,DetailedEventResponseObject.class);
                 detailedEvent = detailedEventResponseObject.getResults();
                 textView_eventName.setText(detailedEvent.getSummary());
+                textView_organizer.setText(detailedEvent.getOrganizer().getDisplayName());
                 textView_startDate.setText(DateUtility.getDetailedEventFormatedDate(detailedEvent.getStart().getDateTime()));
                 textView_startTime.setText(DateUtility.getFormattedTime(detailedEvent.getStart().getDateTime()));
                 textView_endDate.setText(DateUtility.getDetailedEventFormatedDate(detailedEvent.getEnd().getDateTime()));
@@ -112,6 +118,8 @@ public class DetailedEvent extends AppCompatActivity {
                 AttendeesAdapter attendeesAdapter = new AttendeesAdapter(context,attendeeList);
                 listView_Attendees.setAdapter(attendeesAdapter);
                 setListViewHeightBasedOnChildren(listView_Attendees);
+
+                Picasso.with(context).load(R.drawable.emptyprofilepicture).transform(new CircleTransform()).into(imageView_organizerProfileImage);
 
             }
         }, new Response.ErrorListener() {
