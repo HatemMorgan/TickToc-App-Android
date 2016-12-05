@@ -14,9 +14,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.hatem.tick_toc_app.Adapters.EventsAdapter;
-import com.example.hatem.tick_toc_app.ORM.EventListItem;
-import com.example.hatem.tick_toc_app.ORM.EventsResponseObject;
+import com.example.hatem.tick_toc_app.Adapters.TasksAdapter;
+import com.example.hatem.tick_toc_app.ORM.TasksListItem;
+import com.example.hatem.tick_toc_app.ORM.TasksResponseObject;
 import com.example.hatem.tick_toc_app.R;
 import com.google.gson.Gson;
 
@@ -61,17 +61,19 @@ public class TasksActivity extends AppCompatActivity {
                 .appendQueryParameter(URID_PARAM,"5843bbfa010b6d0f739c1c74")
                 .build();
 
-        StringRequest getAllEventsRequest = new StringRequest(Request.Method.GET, buildURI.toString(), new Response.Listener<String>() {
+        StringRequest getAllTasksRequest = new StringRequest(Request.Method.GET, buildURI.toString(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
-                EventsResponseObject eventsResponseObject = gson.fromJson(response,EventsResponseObject.class);
-                List<EventListItem> eventListItems = eventsResponseObject.getResults();
-                if(eventListItems.size() == 0){
+                TasksResponseObject tasksResponseObject = gson.fromJson(response, TasksResponseObject.class);
+                List<TasksListItem> tasksListItems = tasksResponseObject.getResults();
+                if(tasksListItems.size() == 0){
+                    textView_NoTasks.setVisibility(View.VISIBLE);
+                    listView.setVisibility(View.GONE);
                     textView_NoTasks.setText("You have no upcoming tasks");
                 }else{
-                    EventsAdapter eventsAdapter = new EventsAdapter(context,eventListItems);
-                    listView.setAdapter(eventsAdapter);
+                    TasksAdapter tasksAdapter = new TasksAdapter(context,tasksListItems);
+                    listView.setAdapter(tasksAdapter);
                 }
 
             }
@@ -82,7 +84,7 @@ public class TasksActivity extends AppCompatActivity {
             }
         });
 
-        RequestQueueSingelton.getmInstance(context).getmRequestQueue().add(getAllEventsRequest);
+        RequestQueueSingelton.getmInstance(context).getmRequestQueue().add(getAllTasksRequest);
 
     }
     private void initToolBar() {
