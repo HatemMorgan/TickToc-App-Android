@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -49,7 +48,15 @@ public class TasksActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                new Toast(context).makeText(context,"click",Toast.LENGTH_LONG).show();
+                TextView textViewName = (TextView) view.findViewById(R.id.task_item_name);
+                String taskID = (String) textViewName.getContentDescription();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("taskID",taskID);
+                Intent intent = new Intent(context,DetailedTask.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                finish();
             }
         });
         System.out.print("here");

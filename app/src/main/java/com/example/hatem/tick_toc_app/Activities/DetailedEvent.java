@@ -144,7 +144,7 @@ public class DetailedEvent extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, EventsActivity.class);
                 startActivity(intent);
                 finish();
             }

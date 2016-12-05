@@ -70,6 +70,7 @@ public class TasksAdapter extends BaseAdapter {
         }
 
         TasksListItem tasksListItem = getItem(position);
+        viewHolder.textView_taskName.setContentDescription(tasksListItem.getId());
         viewHolder.textView_taskName.setText(tasksListItem.getTitle());
         String strDate = tasksListItem.getStartDateTime();
         viewHolder.textView_tasksDate.setText(DateUtility.getFormateDate(strDate.substring(0, 19)+"Z"));
