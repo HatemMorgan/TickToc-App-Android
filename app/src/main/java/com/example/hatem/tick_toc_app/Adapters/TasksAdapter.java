@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.hatem.tick_toc_app.ORM.TasksListItem;
@@ -29,9 +30,10 @@ public class TasksAdapter extends BaseAdapter {
     }
 
         static class ViewHolder{
-            TextView textView_taskName;
-            TextView textView_tasksDate;
-            
+            private TextView textView_taskName;
+            private TextView textView_tasksDate;
+            private  ImageButton buttonDelete;
+            private ImageButton buttonUpate;
 
     }
 
@@ -58,6 +60,8 @@ public class TasksAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.tasks_list_item,null);
             viewHolder.textView_taskName = (TextView) convertView.findViewById(R.id.task_item_name);
             viewHolder.textView_tasksDate = (TextView) convertView.findViewById(R.id.task_item_date);
+            viewHolder.buttonDelete = (ImageButton) convertView.findViewById(R.id.task_btn_delete);
+            viewHolder.buttonUpate = (ImageButton) convertView.findViewById(R.id.task_btn_update);
             convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -67,7 +71,8 @@ public class TasksAdapter extends BaseAdapter {
         viewHolder.textView_taskName.setText(tasksListItem.getTitle());
         String strDate = tasksListItem.getStartDateTime();
         viewHolder.textView_tasksDate.setText(DateUtility.getFormateDate(strDate.substring(0, 19)+"Z"));
-
+        viewHolder.buttonDelete.setContentDescription(tasksListItem.getId());
+        viewHolder.buttonUpate.setContentDescription(tasksListItem.getId());
         return  convertView;
     }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.hatem.tick_toc_app.ORM.EventListItem;
@@ -33,6 +34,8 @@ public class EventsAdapter extends BaseAdapter {
         private TextView textView_eventName;
         private TextView textView_eventDate;
         private TextView textView_eventTime;
+        private ImageButton buttonDelete;
+        private ImageButton buttonUpate;
     }
 
     @Override
@@ -60,6 +63,8 @@ public class EventsAdapter extends BaseAdapter {
                 viewHolder.textView_eventName = (TextView) convertView.findViewById(R.id.event_item_name);
                 viewHolder.textView_eventDate = (TextView) convertView.findViewById(R.id.event_item_date);
                 viewHolder.textView_eventTime = (TextView) convertView.findViewById(R.id.event_item_time);
+                viewHolder.buttonDelete = (ImageButton) convertView.findViewById(R.id.event_btn_delete);
+                viewHolder.buttonUpate = (ImageButton) convertView.findViewById(R.id.event_btn_update);
                 convertView.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
@@ -69,6 +74,8 @@ public class EventsAdapter extends BaseAdapter {
         viewHolder.textView_eventName.setText(eventListItem.getSummary());
         viewHolder.textView_eventDate.setText(DateUtility.getFormateDate(eventListItem.getStart().getDateTime()));
         viewHolder.textView_eventTime.setText(DateUtility.getFormattedTime(eventListItem.getStart().getDateTime()));
+        viewHolder.buttonDelete.setContentDescription(eventListItem.getId());
+        viewHolder.buttonUpate.setContentDescription(eventListItem.getId());
         return convertView;
     }
 }
