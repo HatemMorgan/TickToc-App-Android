@@ -12,6 +12,8 @@ import com.example.hatem.tick_toc_app.R;
 
 import java.util.List;
 
+import Utilities.DateUtility;
+
 /**
  * Created by hatem on 12/4/16.
  */
@@ -21,7 +23,7 @@ public class EventsAdapter extends BaseAdapter {
     LayoutInflater layoutInflater;
     Context context;
 
-    public EventsAdapter(List<EventListItem> eventListItemList, Context context) {
+    public EventsAdapter(Context context,List<EventListItem> eventListItemList) {
         this.eventListItemList = eventListItemList;
         this.context = context;
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
@@ -64,7 +66,9 @@ public class EventsAdapter extends BaseAdapter {
         }
 
         EventListItem eventListItem = getItem(position);
-//        viewHolder.textView_eventName.setText(eventListItem.ge);
+        viewHolder.textView_eventName.setText(eventListItem.getSummary());
+        viewHolder.textView_eventDate.setText(DateUtility.getFormateDate(eventListItem.getStart().getDateTime()));
+        viewHolder.textView_eventTime.setText(DateUtility.getFormattedTime(eventListItem.getStart().getDateTime()));
         return convertView;
     }
 }
