@@ -48,11 +48,11 @@ public class TasksActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getAllEvents();
+        getAllTasks();
     }
 
 
-    private void getAllEvents () {
+    private void getAllTasks () {
         final String URID_PARAM = "userID";
 
         String allEventsUrl = "http://52.41.53.13/tasks/list";
