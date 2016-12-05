@@ -55,7 +55,7 @@ public class DetailedEvent extends AppCompatActivity {
         textView_eventName = (TextView) findViewById(R.id.detailedEvent_textView_title);
         textView_startDate = (TextView) findViewById(R.id.detialedEvent_textView_startDate);
         textView_startTime = (TextView) findViewById(R.id.detialedEvent_textView_startTime);
-        textView_endDate = (TextView) findViewById(R.id.detialedEvent_textView_endTime);
+        textView_endDate = (TextView) findViewById(R.id.detialedEvent_textView_endDate);
         textView_endTime = (TextView) findViewById(R.id.detialedEvent_textView_endTime);
         textView_organizer = (TextView) findViewById(R.id.detailedEvent_textview_oragnizeEmail);
         listView_Attendees = (ListView) findViewById(R.id.detailedEvent_listView);
@@ -155,23 +155,31 @@ public class DetailedEvent extends AppCompatActivity {
     // used to set the hieght of the list view based on the children when adding a listview to scroll view
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null)
+        if (listAdapter == null) {
             return;
+        }else{
+            int targetWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+            int totalHeight = 0;
+            View view = null;
+            for (int i = 0; i < listAdapter.getCount(); i++) {
+                view = listAdapter.getView(i, null, listView);
 
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
-        int totalHeight = 0;
-        View view = null;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            view = listAdapter.getView(i, view, listView);
-            if (i == 0)
-                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+                if (i == 0) {
+                    view.setLayoutParams(new ViewGroup.LayoutParams(targetWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-            totalHeight += view.getMeasuredHeight();
+                }
+
+                view.measure(targetWidth, View.MeasureSpec.UNSPECIFIED);
+                totalHeight += view.getMeasuredHeight();
+            }
+
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+            listView.setLayoutParams(params);
         }
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
+
+
     }
+
 
 }

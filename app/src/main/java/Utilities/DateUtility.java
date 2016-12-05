@@ -59,7 +59,7 @@ public class DateUtility {
         try {
 
             Date date = formatter.parse(strDate);
-            SimpleDateFormat dayNameFormat = new SimpleDateFormat("EEEE", Locale.ENGLISH);
+            SimpleDateFormat dayNameFormat = new SimpleDateFormat("EE", Locale.ENGLISH);
             return dayNameFormat.format(date);
         }catch (ParseException e){
             e.printStackTrace();
