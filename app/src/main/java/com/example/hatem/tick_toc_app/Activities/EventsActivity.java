@@ -16,7 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.hatem.tick_toc_app.Adapters.EventsAdapter;
 import com.example.hatem.tick_toc_app.ORM.EventListItem;
-import com.example.hatem.tick_toc_app.ORM.ResponseObject;
+import com.example.hatem.tick_toc_app.ORM.EventsResponseObject;
 import com.example.hatem.tick_toc_app.R;
 import com.google.gson.Gson;
 
@@ -64,8 +64,8 @@ public class EventsActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
-                ResponseObject responseObject = gson.fromJson(response,ResponseObject.class);
-                List<EventListItem> eventListItems = responseObject.getResults();
+                EventsResponseObject eventsResponseObject = gson.fromJson(response,EventsResponseObject.class);
+                List<EventListItem> eventListItems = eventsResponseObject.getResults();
 
                 if(eventListItems.size() == 0){
                     textView_NoEvents.setText("You have no upcoming events");

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by hatem on 12/4/16.
  */
-public class ResponseObject {
+public class EventsResponseObject {
 
 
         @SerializedName("Status")
