@@ -42,6 +42,21 @@ public class EventsActivity extends AppCompatActivity {
         context = this;
         initToolBar();
 
+
+        listView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textViewName = (TextView) v.findViewById(R.id.event_item_name);
+                String id = (String) textViewName.getContentDescription();
+
+                Bundle bundle = new Bundle();
+                bundle.putString("eventID",id);
+                Intent intent = new Intent(context,DetailedEvent.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     @Override

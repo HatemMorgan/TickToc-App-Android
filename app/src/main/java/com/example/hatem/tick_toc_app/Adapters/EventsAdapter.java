@@ -71,6 +71,7 @@ public class EventsAdapter extends BaseAdapter {
         }
 
         EventListItem eventListItem = getItem(position);
+        viewHolder.textView_eventName.setContentDescription(eventListItem.getId());
         viewHolder.textView_eventName.setText(eventListItem.getSummary());
         viewHolder.textView_eventDate.setText(DateUtility.getFormateDate(eventListItem.getStart().getDateTime()));
         viewHolder.textView_eventTime.setText(DateUtility.getFormattedTime(eventListItem.getStart().getDateTime()));

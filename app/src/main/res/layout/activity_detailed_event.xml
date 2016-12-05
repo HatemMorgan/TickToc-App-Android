@@ -15,7 +15,7 @@
         >
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/events_toolbar"
+            android:id="@+id/detailedEvents_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -36,7 +36,7 @@
                 android:text="Party"
                 android:textStyle="italic"
                 android:layout_marginLeft="15dp"
-                android:id="@+id/textView_title"
+                android:id="@+id/detailedEvent_textView_title"
                 android:layout_gravity="center_vertical"
                 android:textSize="@android:dimen/app_icon_size"
 
@@ -169,11 +169,62 @@
             />
 
         <ImageView
+            android:id="@+id/detailedEvent_imageview_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/staticmap"
 
             />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="10dip"
+            android:background="@color/grey"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Organize :"
+            android:textStyle="bold"
+            android:textSize="10pt"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_margin="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/detailedEvent_imageView_organizeImage"
+                android:src="@mipmap/ic_launcher"
+                />
+
+            <TextView
+                android:id="@+id/detailedEvent_textview_oragnizeEmail"
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hatemmorgan17@gmail.com"
+                android:textSize="6pt"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+                />
+
+            <ImageView
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ok"
+                />
+
+
+        </LinearLayout>
 
         <View
             android:layout_width="fill_parent"
