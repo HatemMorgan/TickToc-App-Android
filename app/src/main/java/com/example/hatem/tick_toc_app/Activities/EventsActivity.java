@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -29,6 +28,7 @@ public class EventsActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     ListView listView;
+    TextView textView_NoEvents ;
     Context context;
 
     @Override
@@ -38,6 +38,7 @@ public class EventsActivity extends AppCompatActivity {
 
 
         listView = (ListView) findViewById(R.id.events_listview);
+        textView_NoEvents = (TextView) findViewById(R.id.event_textView_noEvents);
         context = this;
         initToolBar();
 
@@ -65,9 +66,15 @@ public class EventsActivity extends AppCompatActivity {
                 Gson gson = new Gson();
                 ResponseObject responseObject = gson.fromJson(response,ResponseObject.class);
                 List<EventListItem> eventListItems = responseObject.getResults();
-                EventsAdapter eventsAdapter = new EventsAdapter(context,eventListItems);
-                listView.setAdapter(eventsAdapter);
-//                setListViewHeightBasedOnChildren(listView);
+
+                if(eventListItems.size() == 0){
+                    textView_NoEvents.setText("You have no upcoming events");
+                }else{
+                    EventsAdapter eventsAdapter = new EventsAdapter(context,eventListItems);
+                    listView.setAdapter(eventsAdapter);
+                }
+
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -99,27 +106,6 @@ public class EventsActivity extends AppCompatActivity {
 
     }
 
-    // used to set the hieght of the list view based on the children when adding a listview to scroll view
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null)
-            return;
-
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
-        int totalHeight = 0;
-        View view = null;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            view = listAdapter.getView(i, view, listView);
-            if (i == 0)
-                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-            view.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-            totalHeight += view.getMeasuredHeight();
-        }
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-    }
 
 
 }
