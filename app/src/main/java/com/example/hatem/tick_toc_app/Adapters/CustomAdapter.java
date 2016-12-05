@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.example.hatem.tick_toc_app.R;
 
-import Utilities.ListViewItem;
-import Utilities.ViewHolder;
+import com.example.hatem.tick_toc_app.Utilities.ListViewItem;
+import com.example.hatem.tick_toc_app.Utilities.ViewHolder;
 
 /**
  * Created by baselabdallah on 12/5/16.

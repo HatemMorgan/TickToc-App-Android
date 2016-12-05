@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import Utilities.ListViewItem;
+import com.example.hatem.tick_toc_app.Utilities.ListViewItem;
 
 public class EventChat extends AppCompatActivity {
 

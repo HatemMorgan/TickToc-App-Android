@@ -1,4 +1,4 @@
-package Utilities;
+package com.example.hatem.tick_toc_app.Utilities;
 
 /**
  * Created by baselabdallah on 12/5/16.

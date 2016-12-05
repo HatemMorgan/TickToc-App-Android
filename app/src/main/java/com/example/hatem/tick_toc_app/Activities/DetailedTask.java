@@ -20,8 +20,8 @@ import com.example.hatem.tick_toc_app.R;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
-import Utilities.DateUtility;
-import Utilities.RequestQueueSingelton;
+import com.example.hatem.tick_toc_app.Utilities.DateUtility;
+import com.example.hatem.tick_toc_app.Utilities.RequestQueueSingelton;
 
 public class DetailedTask extends AppCompatActivity {
 

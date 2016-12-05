@@ -1,4 +1,4 @@
-package Utilities;
+package com.example.hatem.tick_toc_app.Utilities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;

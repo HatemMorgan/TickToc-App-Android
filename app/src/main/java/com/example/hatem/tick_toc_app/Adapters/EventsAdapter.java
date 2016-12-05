@@ -12,7 +12,7 @@ import com.example.hatem.tick_toc_app.R;
 
 import java.util.List;
 
-import Utilities.DateUtility;
+import com.example.hatem.tick_toc_app.Utilities.DateUtility;
 
 /**
  * Created by hatem on 12/4/16.

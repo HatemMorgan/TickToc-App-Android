@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import Utilities.CircleTransform;
+import com.example.hatem.tick_toc_app.Utilities.CircleTransform;
 
 /**
  * Created by hatem on 12/5/16.

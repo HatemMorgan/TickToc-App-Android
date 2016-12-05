@@ -24,13 +24,11 @@ import com.example.hatem.tick_toc_app.ORM.DetailedEventObj;
 import com.example.hatem.tick_toc_app.ORM.DetailedEventResponseObject;
 import com.example.hatem.tick_toc_app.R;
 import com.google.gson.Gson;
+import com.example.hatem.tick_toc_app.Utilities.*;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import Utilities.CircleTransform;
-import Utilities.DateUtility;
-import Utilities.RequestQueueSingelton;
 
 public class DetailedEvent extends AppCompatActivity {
 

@@ -23,7 +23,7 @@ import com.google.gson.Gson;
 
 import java.util.List;
 
-import Utilities.RequestQueueSingelton;
+import com.example.hatem.tick_toc_app.Utilities.RequestQueueSingelton;
 
 public class EventsActivity extends AppCompatActivity {
 
