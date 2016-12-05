@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class ResponseObject {
 
+
         @SerializedName("Status")
         @Expose
         private Integer status;
@@ -24,98 +25,96 @@ public class ResponseObject {
         private String calendar;
         @SerializedName("results")
         @Expose
-        private List<Event> results = null;
+        private List<EventListItem> results = null;
 
         /**
          *
          * @return
-         *     The status
+         * The status
          */
         public Integer getStatus() {
-            return status;
+                return status;
         }
 
         /**
          *
          * @param status
-         *     The Status
+         * The Status
          */
         public void setStatus(Integer status) {
-            this.status = status;
+                this.status = status;
         }
 
         /**
          *
          * @return
-         *     The message
+         * The message
          */
         public String getMessage() {
-            return message;
+                return message;
         }
 
         /**
          *
          * @param message
-         *     The message
+         * The message
          */
         public void setMessage(String message) {
-            this.message = message;
+                this.message = message;
         }
 
         /**
          *
          * @return
-         *     The page
+         * The page
          */
         public Integer getPage() {
-            return page;
+                return page;
         }
 
         /**
          *
          * @param page
-         *     The page
+         * The page
          */
         public void setPage(Integer page) {
-            this.page = page;
+                this.page = page;
         }
 
         /**
          *
          * @return
-         *     The calendar
+         * The calendar
          */
         public String getCalendar() {
-            return calendar;
+                return calendar;
         }
 
         /**
          *
          * @param calendar
-         *     The calendar
+         * The calendar
          */
         public void setCalendar(String calendar) {
-            this.calendar = calendar;
+                this.calendar = calendar;
         }
 
         /**
          *
          * @return
-         *     The results
+         * The results
          */
-        public List<Event> getResults() {
-            return results;
+        public List<EventListItem> getResults() {
+                return results;
         }
 
         /**
          *
          * @param results
-         *     The results
+         * The results
          */
-        public void setResults(List<Event> results) {
-            this.results = results;
+        public void setResults(List<EventListItem> results) {
+                this.results = results;
         }
-
-
 
 }
