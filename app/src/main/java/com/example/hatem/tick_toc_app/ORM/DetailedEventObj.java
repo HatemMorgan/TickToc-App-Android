@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by hatem on 12/5/16.
  */
-public class DetailedEvent {
+public class DetailedEventObj {
     @SerializedName("attendees")
     @Expose
     private List<Attendee> attendees = null;

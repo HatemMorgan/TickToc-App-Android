@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,10 +27,10 @@ import Utilities.RequestQueueSingelton;
 
 public class EventsActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
-    ListView listView;
-    TextView textView_NoEvents ;
-    Context context;
+   private Toolbar toolbar;
+    private ListView eventsListView;
+   private TextView textView_NoEvents ;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +38,24 @@ public class EventsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_events);
 
 
-        listView = (ListView) findViewById(R.id.events_listview);
+        eventsListView = (ListView) findViewById(R.id.events_listview);
         textView_NoEvents = (TextView) findViewById(R.id.event_textView_noEvents);
         context = this;
         initToolBar();
 
 
-        listView.setOnClickListener(new View.OnClickListener() {
+
+
+        eventsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
-                TextView textViewName = (TextView) v.findViewById(R.id.event_item_name);
-                String id = (String) textViewName.getContentDescription();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView textViewName = (TextView) view.findViewById(R.id.event_item_name);
+                String eventID = (String) textViewName.getContentDescription();
 
                 Bundle bundle = new Bundle();
-                bundle.putString("eventID",id);
+                bundle.putString("eventID",eventID);
                 Intent intent = new Intent(context,DetailedEvent.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
             }
@@ -86,7 +90,7 @@ public class EventsActivity extends AppCompatActivity {
                     textView_NoEvents.setText("You have no upcoming events");
                 }else{
                     EventsAdapter eventsAdapter = new EventsAdapter(context,eventListItems);
-                    listView.setAdapter(eventsAdapter);
+                    eventsListView.setAdapter(eventsAdapter);
                 }
 
 

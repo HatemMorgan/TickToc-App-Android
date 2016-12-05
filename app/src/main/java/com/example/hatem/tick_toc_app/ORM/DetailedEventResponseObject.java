@@ -15,7 +15,7 @@ public class DetailedEventResponseObject {
     private String message;
     @SerializedName("results")
     @Expose
-    private DetailedEvent results;
+    private DetailedEventObj results;
 
     /**
      *
@@ -58,7 +58,7 @@ public class DetailedEventResponseObject {
      * @return
      * The results
      */
-    public DetailedEvent getResults() {
+    public DetailedEventObj getResults() {
         return results;
     }
 
@@ -67,7 +67,7 @@ public class DetailedEventResponseObject {
      * @param results
      * The results
      */
-    public void setResults(DetailedEvent results) {
+    public void setResults(DetailedEventObj results) {
         this.results = results;
     }
 }

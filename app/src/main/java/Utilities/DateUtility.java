@@ -123,4 +123,14 @@ public class DateUtility {
         return  null ;
 
     }
+
+
+    public static  String getDetailedEventFormatedDate(String strDate){
+            String dayName = getFormatedDayName(strDate);
+            String dayNum = getFormatedDayNumber(strDate);
+            String monthName = getFormattedMonth(strDate);
+            String year = getFormattedyear(strDate);
+
+            return dayName+", "+dayNum+" "+monthName+" "+year;
+    }
 }

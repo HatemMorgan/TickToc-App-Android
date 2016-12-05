@@ -6,30 +6,34 @@
 
         <ImageView
             android:layout_margin="15dp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/imageView_Review_AuthorImage"
             android:src="@mipmap/ic_launcher"
+            android:layout_weight="1"
             />
 
     <TextView
         android:id="@+id/detailedEvent_textview_email"
         android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="hatemmorgan17@gmail.com"
         android:textSize="6pt"
         android:layout_marginLeft="10dp"
         android:textColor="@color/black"
+        android:layout_weight="3"
         />
 
     <ImageView
         android:id="@+id/detailedEvent_imageview_status"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="25dp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:src="@drawable/pending"
+        android:layout_weight="1"
+
         />
 
 

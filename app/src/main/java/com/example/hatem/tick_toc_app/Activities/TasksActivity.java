@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -26,10 +28,10 @@ import Utilities.RequestQueueSingelton;
 
 public class TasksActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
-    ListView listView;
-    TextView textView_NoTasks ;
-    Context context;
+    private Toolbar toolbar;
+    private ListView listView;
+    private TextView textView_NoTasks ;
+   private Context context;
 
 
     @Override
@@ -43,6 +45,14 @@ public class TasksActivity extends AppCompatActivity {
         context = this;
         initToolBar();
 
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                new Toast(context).makeText(context,"click",Toast.LENGTH_LONG).show();
+            }
+        });
+        System.out.print("here");
     }
 
     @Override
