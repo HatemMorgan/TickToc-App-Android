@@ -35,17 +35,22 @@
         <LinearLayout
             android:id="@+id/email_registeration_form"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
 
-
+<LinearLayout
+    android:id="@+id/registeration_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
                 <AutoCompleteTextView
                     android:id="@+id/registeration_firstName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="First Name"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:layout_marginBottom="10dp"
                     android:singleLine="true" />
@@ -58,7 +63,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Last Name"
-                    android:inputType="textEmailAddress"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:layout_marginBottom="10dp"
                     android:singleLine="true" />
@@ -78,6 +83,19 @@
                     android:singleLine="true" />
 
 
+
+</LinearLayout>
+
+            <AutoCompleteTextView
+                android:id="@+id/registeration_Token"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Token Code"
+                android:inputType="text"
+                android:maxLines="1"
+                android:visibility="gone"
+                android:layout_marginBottom="10dp"
+                android:singleLine="true" />
 
 
             <Button

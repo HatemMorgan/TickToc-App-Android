@@ -13,9 +13,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.hatem.tick_toc_app.Adapters.CustomAdapter;
 import com.example.hatem.tick_toc_app.R;
+import com.example.hatem.tick_toc_app.Utilities.ListViewItem;
+import com.example.hatem.tick_toc_app.Utilities.RequestQueueSingelton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,8 +24,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.example.hatem.tick_toc_app.Utilities.ListViewItem;
 
 public class TaskChat extends AppCompatActivity {
 
@@ -69,8 +68,8 @@ public class TaskChat extends AppCompatActivity {
                         error.printStackTrace();
                     }
                 });
-
-        Volley.newRequestQueue(this).add(jsonRequest);
+        RequestQueueSingelton.getmInstance(this).getmRequestQueue().add(jsonRequest);
+//        Volley.newRequestQueue(this).add(jsonRequest);
 
         mButton.setOnClickListener(
                 new View.OnClickListener()
@@ -123,7 +122,8 @@ public class TaskChat extends AppCompatActivity {
                 return params;
             }
         };
-        Volley.newRequestQueue(this).add(postRequest);
+        RequestQueueSingelton.getmInstance(this).getmRequestQueue().add(postRequest);
+//        Volley.newRequestQueue(this).add(postRequest);
     }
 
     public ListViewItem[] createList (String tv, boolean user, ListViewItem[] old){

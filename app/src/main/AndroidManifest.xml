@@ -18,21 +18,22 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.MainActivity" />
         <activity android:name=".Activities.EventsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activities.TasksActivity" />
         <activity android:name=".Activities.DetailedEvent" />
         <activity android:name=".Activities.DetailedTask" />
         <activity android:name=".Activities.TaskChat" />
         <activity android:name=".Activities.EventChat" />
-        <activity
-            android:name=".RegisterationActivity"
-            android:label="@string/title_activity_registeration" />
-        <activity android:name=".Activities.RegisterationActivity"></activity>
+
+        <activity android:name=".Activities.RegisterationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
