@@ -1,6 +1,7 @@
 package com.example.hatem.tick_toc_app.Activities;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -42,33 +43,40 @@ public class TaskChat extends AppCompatActivity {
         mButton = (ImageView)findViewById(R.id.sendimg);
         mEdit   = (EditText)findViewById(R.id.edittext);
 
-        // Welcome message
-        String welcome_url = "http://52.41.53.13/welcome?userID=5843bbfa010b6d0f739c1c74";
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.MY_PREFS_NAME), MODE_PRIVATE);
+        final String userID = prefs.getString("userID", null);
+        if (userID != null) {
+            // Welcome message
+            String welcome_url = "http://52.41.53.13/welcome?userID="+userID;
 
-        JsonObjectRequest jsonRequest = new JsonObjectRequest
-                (Request.Method.GET, welcome_url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // the response is already constructed as a JSONObject!
-                        try {
-                            JSONArray temp=response.getJSONArray("results");
-                            JSONObject temp1=temp.getJSONObject(0);
-                            String message= temp1.getString("message");
-                            uuid= temp1.getString("uuid");
-                            ListViewItem[] newlist=createList(message, false, currentList);
-                            currentList=newlist;
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+            JsonObjectRequest jsonRequest = new JsonObjectRequest
+                    (Request.Method.GET, welcome_url, null, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            // the response is already constructed as a JSONObject!
+                            try {
+                                JSONArray temp=response.getJSONArray("results");
+                                JSONObject temp1=temp.getJSONObject(0);
+                                String message= temp1.getString("message");
+                                uuid= temp1.getString("uuid");
+                                ListViewItem[] newlist=createList(message, false, currentList);
+                                currentList=newlist;
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                }, new Response.ErrorListener() {
+                    }, new Response.ErrorListener() {
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                });
-        RequestQueueSingelton.getmInstance(this).getmRequestQueue().add(jsonRequest);
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            error.printStackTrace();
+                        }
+                    });
+            RequestQueueSingelton.getmInstance(this).getmRequestQueue().add(jsonRequest);
+
+        }
+
+
 //        Volley.newRequestQueue(this).add(jsonRequest);
 
         mButton.setOnClickListener(
@@ -81,7 +89,7 @@ public class TaskChat extends AppCompatActivity {
                         //send this to api
                         ListViewItem[] newlist=createList(tv, true, currentList);
                         currentList=newlist;
-                        chatPost();
+                        chatPost(userID);
                         mEdit.setText("");
 
                     }
@@ -89,8 +97,8 @@ public class TaskChat extends AppCompatActivity {
     }
 
 
-    public void chatPost (){
-        String event_url = "http://52.41.53.13/chat/task?userID=5843bbfa010b6d0f739c1c74";
+    public void chatPost (String userID){
+        String event_url = "http://52.41.53.13/chat/task?userID="+userID;
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("message", tv);
         JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, event_url, new JSONObject(params),

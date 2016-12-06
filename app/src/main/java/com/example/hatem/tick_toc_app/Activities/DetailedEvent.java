@@ -2,6 +2,7 @@ package com.example.hatem.tick_toc_app.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -80,17 +81,25 @@ public class DetailedEvent extends AppCompatActivity {
         super.onStart();
         Bundle bundle = this.getIntent().getExtras();
         String eventID = bundle.getString("eventID");
-        getEventDetails(eventID);
+
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.MY_PREFS_NAME), MODE_PRIVATE);
+        final String userID = prefs.getString("userID", null);
+        if (userID != null) {
+            getEventDetails(eventID,userID);
+
+        }
+
+
     }
 
-    private void getEventDetails(String eventID){
+    private void getEventDetails(String eventID,String userID){
 
         final String USERID_PARAM = "userID";
         final String EVENTID_PARAM = "id";
         String allEventsUrl = "http://52.41.53.13/events";
         Uri buildURI = Uri.parse(allEventsUrl)
                 .buildUpon()
-                .appendQueryParameter(USERID_PARAM,"5843bbfa010b6d0f739c1c74")
+                .appendQueryParameter(USERID_PARAM,userID)
                 .appendQueryParameter(EVENTID_PARAM,eventID)
                 .build();
 

@@ -2,6 +2,7 @@ package com.example.hatem.tick_toc_app.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,11 +20,10 @@ import com.example.hatem.tick_toc_app.Adapters.TasksAdapter;
 import com.example.hatem.tick_toc_app.ORM.TasksListItem;
 import com.example.hatem.tick_toc_app.ORM.TasksResponseObject;
 import com.example.hatem.tick_toc_app.R;
+import com.example.hatem.tick_toc_app.Utilities.RequestQueueSingelton;
 import com.google.gson.Gson;
 
 import java.util.List;
-
-import com.example.hatem.tick_toc_app.Utilities.RequestQueueSingelton;
 
 public class TasksActivity extends AppCompatActivity {
 
@@ -65,17 +65,24 @@ public class TasksActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        getAllTasks();
+
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.MY_PREFS_NAME), MODE_PRIVATE);
+        final String userID = prefs.getString("userID", null);
+        if (userID != null) {
+            getAllTasks(userID);
+        }
+
+
     }
 
 
-    private void getAllTasks () {
+    private void getAllTasks (String userID) {
         final String URID_PARAM = "userID";
 
         String allEventsUrl = "http://52.41.53.13/tasks/list";
         Uri buildURI = Uri.parse(allEventsUrl)
                 .buildUpon()
-                .appendQueryParameter(URID_PARAM,"5843bbfa010b6d0f739c1c74")
+                .appendQueryParameter(URID_PARAM,userID)
                 .build();
 
         StringRequest getAllTasksRequest = new StringRequest(Request.Method.GET, buildURI.toString(), new Response.Listener<String>() {
