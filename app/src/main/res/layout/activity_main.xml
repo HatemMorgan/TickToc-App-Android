@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activities.MainActivity"
     android:background="@drawable/back_home"
     android:orientation="vertical">
     <LinearLayout
@@ -35,15 +37,20 @@
             android:orientation="horizontal"
             >
 
-        <ImageView
+        <ImageButton
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_height="100dp"
             android:src="@drawable/add_event"
             android:id="@+id/imageView22"
             android:layout_weight="1" />
-        <ImageView
+
+        <ImageButton
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_height="100dp"
             android:src="@drawable/add_task"
             android:id="@+id/imageView23"
             android:layout_weight="1" />
@@ -56,16 +63,22 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         >
-        <ImageView
+
+        <ImageButton
             android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:src="@drawable/all_events"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_height="100dp"
+           android:src="@drawable/all_events"
             android:id="@+id/imageView24"
             android:layout_weight="1" />
-        <ImageView
+
+        <ImageButton
             android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:src="@drawable/all_tasks"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="20dp"
+            android:layout_height="100dp"
+           android:src="@drawable/all_tasks"
             android:id="@+id/imageView25"
             android:layout_weight="1" />
     </LinearLayout>

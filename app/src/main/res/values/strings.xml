@@ -15,4 +15,5 @@
         completions."
     </string>
     <string name="MY_PREFS_NAME">TickToc</string>
+    <string name="google_place_api">AIzaSyCKmFabcYYc12JJGFDbSH5cPdb3dzXjZsw</string>
 </resources>

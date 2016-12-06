@@ -134,6 +134,7 @@ public class RegisterationActivity extends AppCompatActivity {
                     Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                             Uri.parse(authURL));
                     startActivity(intent);
+                    RequestQueueSingelton.getmInstance(context).EmptyQueue();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -145,8 +146,9 @@ public class RegisterationActivity extends AppCompatActivity {
 
             }
         });
-        RequestQueueSingelton.getmInstance(context).getmRequestQueue().cancelAll("TAG");
-        RequestQueueSingelton.getmInstance(context).getmRequestQueue().add(getAuthURLRequest);
+
+
+        RequestQueueSingelton.getmInstance(context).addToRequestQueue(getAuthURLRequest);
 
     }
 
@@ -162,10 +164,12 @@ public class RegisterationActivity extends AppCompatActivity {
         params.put("lastName",lastName);
         params.put("email",email);
 
+
         JsonObjectRequest addUserRequest = new JsonObjectRequest(Request.Method.POST,buildUri.toString(), new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
+
                     String responseStatus = response.getString("Status");
                     if(Integer.parseInt(responseStatus)== 201){
                         JSONObject result = response.getJSONObject("results");
@@ -212,7 +216,8 @@ public class RegisterationActivity extends AppCompatActivity {
             }
         };;
 
-        RequestQueueSingelton.getmInstance(context).getmRequestQueue().add(addUserRequest);
+        RequestQueueSingelton.getmInstance(context).EmptyQueue();
+        RequestQueueSingelton.getmInstance(context).addToRequestQueue(addUserRequest);
 
     }
 
@@ -224,4 +229,6 @@ public class RegisterationActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
     }
+
+
 }
