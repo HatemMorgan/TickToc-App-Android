@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -42,7 +43,9 @@ public class EventChat extends AppCompatActivity {
 //        final String userID = prefs.getString("userID", null);
 //        if (userID != null) {
 
+
     private ListView listView;
+    private Toolbar toolbar;
     ImageView mButton;
     EditText mEdit;
     String mContent;
@@ -50,6 +53,7 @@ public class EventChat extends AppCompatActivity {
     ListViewItem[] currentList={};
     String uuid;
     String userID ;
+    AppCompatActivity context;
     //For Calendar
 
     DateFormat formatDateTime = DateFormat.getDateTimeInstance();
@@ -61,7 +65,8 @@ public class EventChat extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         mButton = (ImageView)findViewById(R.id.sendimg);
         mEdit   = (EditText)findViewById(R.id.edittext);
-
+        context = this;
+        initToolBar();
                 SharedPreferences prefs = getSharedPreferences(getString(R.string.MY_PREFS_NAME), MODE_PRIVATE);
         final String struserID = prefs.getString("userID", null);
         if (struserID != null) {
@@ -99,27 +104,24 @@ public class EventChat extends AppCompatActivity {
         mButton.setOnClickListener(
                 new View.OnClickListener()
                 {
-                    public void onClick(View view)
-                    {
-                        if(currentList[currentList.length-1].getText().startsWith("Please enter the location")){
+                    public void onClick(View view) {
+                        if (currentList[currentList.length - 1].getText().startsWith("Please enter the location")) {
                             //direct to map
-                            PlacePicker.IntentBuilder builder =new PlacePicker.IntentBuilder();
+                            PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
                             Intent placeIntent;
                             try {
-                                placeIntent=builder.build(getApplicationContext());
-                                startActivityForResult(placeIntent,1);
+                                placeIntent = builder.build(view.getContext());
+                                startActivityForResult(placeIntent, 1);
                             } catch (GooglePlayServicesRepairableException e) {
                                 e.printStackTrace();
                             } catch (GooglePlayServicesNotAvailableException e) {
                                 e.printStackTrace();
                             }
-                        }
-                        else if (currentList[currentList.length-1].getText().startsWith("Please enter the start dateTime") ||
-                                currentList[currentList.length-1].getText().startsWith("Please enter the end dateTime")){
+                        } else{ if (currentList[currentList.length - 1].getText().startsWith("Please enter the start dateTime") ||
+                                currentList[currentList.length - 1].getText().startsWith("Please enter the end dateTime")) {
                             getDateFromCalendar();
                             getTimeFromCalendar();
-                        }
-                        else {
+                        } else {
                             mContent = mEdit.getText().toString();
                             tv = mContent;
                             //send this to api
@@ -128,7 +130,7 @@ public class EventChat extends AppCompatActivity {
                             chatPost(userID);
                             mEdit.setText("");
                         }
-
+                    }
                     }
                 });
     }
@@ -301,5 +303,25 @@ public class EventChat extends AppCompatActivity {
         CustomAdapter customAdapter = new CustomAdapter(this, R.id.text, items);
         listView.setAdapter(customAdapter);
         return items;
+    }
+
+    private void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.chat_toolbar);
+        toolbar.setTitle("Event Chat");
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 }

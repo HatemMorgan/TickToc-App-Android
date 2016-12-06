@@ -3,10 +3,12 @@ package com.example.hatem.tick_toc_app.Activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -32,7 +34,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +41,8 @@ import java.util.Map;
 public class TaskChat extends AppCompatActivity {
 
     private ListView listView;
+    private Toolbar toolbar;
+    Context context;
     ImageView mButton;
     EditText mEdit;
     String mContent;
@@ -48,8 +51,6 @@ public class TaskChat extends AppCompatActivity {
     String uuid;
     String userID ;
     //For Calendar
-
-    DateFormat formatDateTime = DateFormat.getDateTimeInstance();
     Calendar dateTime = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,9 @@ public class TaskChat extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         mButton = (ImageView)findViewById(R.id.sendimg);
         mEdit   = (EditText)findViewById(R.id.edittext);
+        context = this;
+        initToolBar();
+
 
         SharedPreferences prefs = getSharedPreferences(getString(R.string.MY_PREFS_NAME), MODE_PRIVATE);
         final String struserID = prefs.getString("userID", null);
@@ -111,7 +115,8 @@ public class TaskChat extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         }
-                        else if (currentList[currentList.length-1].getText().startsWith("Please enter the start dateTime") ||
+                        else
+                        if (currentList[currentList.length-1].getText().startsWith("Please enter the start dateTime") ||
                                 currentList[currentList.length-1].getText().startsWith("Please enter the end dateTime")){
                             getDateFromCalendar();
                             getTimeFromCalendar();
@@ -298,5 +303,25 @@ public class TaskChat extends AppCompatActivity {
         CustomAdapter customAdapter = new CustomAdapter(this, R.id.text, items);
         listView.setAdapter(customAdapter);
         return items;
+    }
+
+    private void initToolBar() {
+        toolbar = (Toolbar) findViewById(R.id.chat_toolbar);
+        toolbar.setTitle("Task Chat");
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 }
